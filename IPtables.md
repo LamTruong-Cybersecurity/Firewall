@@ -47,3 +47,52 @@
 14. -s --source : địa chỉ [/mask] đặc điểm kỹ thuật nguồn
 15. -d --destination : địa chỉ [/mask] thông số kỹ thuật đích
 16. -o --out-interface : tên đầu ra [+] tên giao diện mạng ([+] cho ký tự đại diện)
+## III. Some basic rules are often used
+1. Kích hoạt lưu lượng truy cập trên Localhost
+
+		sudo iptables -A INPUT -i lo -j ACCEPT
+	Lệnh này có nghĩa là:
+
+	-A INPUT: khai báo kiểu kết nối sẽ được áp dụng (A nghĩa là Append).
+
+	-i lo: Khai báo thiết bị mạng được áp dụng (i nghĩa là Interface).
+	
+	-j ACCEPT: khai báo hành động sẽ được áp dụng cho quy tắc này (j nghĩa là Jump).
+2. Cho phép lưu lại các kết nối hiện tại tránh hiện tượng tự block ra khỏi máy chủ
+
+		sudo iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
+3. Bật kết nối trên cổng SSH, HTTP và HTTPS
+
+		sudo iptables -A INPUT -p tcp --dport 22 -j ACCEPT
+		sudo iptables -A INPUT -p tcp --dport 80 -j ACCEPT
+		sudo iptables -A INPUT -p tcp --dport 443 -j ACCEPT
+	-p tcp : Giao thức được áp dụng (tcp, udp, all)
+
+	–dport 22, 80, 443: Cổng cho phép áp dụng lần lượt là SSH, HTTP, HTTPS
+4. Chặn tất cả lưu lượng truy cập khác
+
+		sudo iptables -A INPUT -j DROP
+
+	Bây giờ, tất cả kết nối bên ngoài cổng được chỉ định sẽ bị ngắt.
+5. Xóa rule
+
+		sudo iptables -F
+	Lệnh này xóa tất cả các quy tắc hiện tại. Tuy nhiên, để xóa một quy tắc cụ thể, bạn phải sử dụng tùy chọn -D. Trước tiên, bạn cần xem tất cả các quy tắc có sẵn bằng cách nhập lệnh sau:
+		
+		sudo iptables -L --line-numbers
+	Bạn sẽ nhận được một danh sách các quy tắc tương ứng với các số:
+
+		Chain INPUT (policy ACCEPT)
+		num  target     prot opt source               destination
+		...
+		2    ACCEPT     tcp -- anywhere             anywhere tcp dpt:https
+		3    ACCEPT     tcp -- anywhere             anywhere tcp dpt:http
+		4    ACCEPT     tcp -- anywhere             anywhere tcp dpt:ssh
+		...
+	Để xóa quy tắc bất kì, hãy chèn chuỗi và số tương ứng từ danh sách. Giả sử trong bảng iptables này, bạn muốn loại bỏ quy tắc số 3 của chuỗi INPUT. Lệnh sẽ là:
+		
+		sudo iptables -D INPUT 3
+6. Chèn một rule mới vào vị trí xác định:
+
+		sudo iptables -I INPUT 2 -p tcp --dport 8080 -j ACCEPT
+	Thay tham số Append -A  bằng tham số INSERT -I. Ở đây luật mới sẽ ở vị trí số 2
