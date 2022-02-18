@@ -156,7 +156,7 @@ Sau khi đã thiết lập tất cả bao gồm mở các port cần thiết ho�
 		sudo iptables -P INPUT DROP
 **10. Lưu cấu hình IPtables**
 
-Lúc này những IPtables rules được tạo ra đều được lưu trong bộ nhớ, khi reboot máy chủ cần phải tạo lại các rules này. Để lưu các rule ra một file backup ta dùng lệnh:
+Lúc này những IPtables rules được tạo ra đều được lưu trong bộ nhớ, khi khởi động lại máy chủ cần phải tạo lại các rules này. Để lưu các rule ra một file backup ta dùng lệnh:
 
 		sudo iptables-save > /usr/src/iptables-rule
 Trong trường hợp xấu không mong muốn có thể bạn xóa một rule nào đó dẫn đến mất kết nối dịch vụ. Để khôi phục lại những rule đã tạo từ file backup ta dùng lệnh sau:
