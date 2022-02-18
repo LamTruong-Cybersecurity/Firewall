@@ -47,6 +47,7 @@
 14. -s --source : địa chỉ [/mask] đặc điểm kỹ thuật nguồn
 15. -d --destination : địa chỉ [/mask] thông số kỹ thuật đích
 16. -o --out-interface : tên đầu ra [+] tên giao diện mạng ([+] cho ký tự đại diện)
+
 ## III. Some basic rules are often used
 1. Kích hoạt lưu lượng truy cập trên Localhost
 
