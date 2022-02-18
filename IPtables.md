@@ -8,9 +8,7 @@
 * [https://www.hostinger.com/tutorials/iptables-tutorial](https://www.hostinger.com/tutorials/iptables-tutorial)
 * [https://wiki.matbao.net/iptables-la-gi-cach-cau-hinh-bao-mat-ubuntu-vps-linux-firewall/](https://wiki.matbao.net/iptables-la-gi-cach-cau-hinh-bao-mat-ubuntu-vps-linux-firewall/)
 ## I. Basic Commands
-
-`$ sudo iptables -L`
-
+		sudo iptables -L
 -> Liệt kê các quy tắc hiện tại của iptables
 
 ## II.Basic Iptables Options
@@ -54,39 +52,42 @@
 16. -o --out-interface : tên đầu ra [+] tên giao diện mạng ([+] cho ký tự đại diện)
 
 ## III. Basic rules are often used
-1. Kích hoạt lưu lượng truy cập trên Localhost
+**1. Kích hoạt lưu lượng truy cập trên Localhost**
 
 		sudo iptables -A INPUT -i lo -j ACCEPT
-	Lệnh này có nghĩa là:
+Lệnh này có nghĩa là:
 
-	-A INPUT: khai báo kiểu kết nối sẽ được áp dụng (A nghĩa là Append).
+-A INPUT: khai báo kiểu kết nối sẽ được áp dụng (A nghĩa là Append).
 
-	-i lo: Khai báo thiết bị mạng được áp dụng (i nghĩa là Interface).
+-i lo: Khai báo thiết bị mạng được áp dụng (i nghĩa là Interface).
 	
-	-j ACCEPT: khai báo hành động sẽ được áp dụng cho quy tắc này (j nghĩa là Jump).
-2. Cho phép lưu lại các kết nối hiện tại tránh hiện tượng tự block ra khỏi máy chủ
+-j ACCEPT: khai báo hành động sẽ được áp dụng cho quy tắc này (j nghĩa là Jump).
+
+**2. Cho phép lưu lại các kết nối hiện tại tránh hiện tượng tự block ra khỏi máy chủ**
 
 		sudo iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
-3. Bật kết nối trên cổng SSH, HTTP và HTTPS
+**3. Bật kết nối trên cổng SSH, HTTP và HTTPS**
 
 		sudo iptables -A INPUT -p tcp --dport 22 -j ACCEPT
 		sudo iptables -A INPUT -p tcp --dport 80 -j ACCEPT
 		sudo iptables -A INPUT -p tcp --dport 443 -j ACCEPT
-	-p tcp : Giao thức được áp dụng (tcp, udp, all)
+-p tcp : Giao thức được áp dụng (tcp, udp, all)
 
-	–dport 22, 80, 443: Cổng cho phép áp dụng lần lượt là SSH, HTTP, HTTPS
-4. Chặn tất cả lưu lượng truy cập khác
+–dport 22, 80, 443: Cổng cho phép áp dụng lần lượt là SSH, HTTP, HTTPS
+
+**4. Chặn tất cả lưu lượng truy cập khác**
 
 		sudo iptables -A INPUT -j DROP
 
-	Bây giờ, tất cả kết nối bên ngoài cổng được chỉ định sẽ bị ngắt.
-5. Xóa rule
+Bây giờ, tất cả kết nối bên ngoài cổng được chỉ định sẽ bị ngắt.
+
+**5. Xóa rule**
 
 		sudo iptables -F
-	Lệnh này xóa tất cả các quy tắc hiện tại. Tuy nhiên, để xóa một quy tắc cụ thể, bạn phải sử dụng tùy chọn -D. Trước tiên, bạn cần xem tất cả các quy tắc có sẵn bằng cách nhập lệnh sau:
+Lệnh này xóa tất cả các quy tắc hiện tại. Tuy nhiên, để xóa một quy tắc cụ thể, bạn phải sử dụng tùy chọn -D. Trước tiên, bạn cần xem tất cả các quy tắc có sẵn bằng cách nhập lệnh sau:
 		
 		sudo iptables -L --line-numbers
-	Bạn sẽ nhận được một danh sách các quy tắc tương ứng với các số:
+Bạn sẽ nhận được một danh sách các quy tắc tương ứng với các số:
 
 		Chain INPUT (policy ACCEPT)
 		num  target     prot opt source               destination
@@ -95,21 +96,66 @@
 		3    ACCEPT     tcp -- anywhere             anywhere tcp dpt:http
 		4    ACCEPT     tcp -- anywhere             anywhere tcp dpt:ssh
 		...
-	Để xóa quy tắc bất kì, hãy chèn chuỗi và số tương ứng từ danh sách. Giả sử trong bảng iptables này, bạn muốn loại bỏ quy tắc số 3 của chuỗi INPUT. Lệnh sẽ là:
+Để xóa quy tắc bất kì, hãy chèn chuỗi và số tương ứng từ danh sách. Giả sử trong bảng iptables này, bạn muốn loại bỏ quy tắc số 3 của chuỗi INPUT. Lệnh sẽ là:
 		
 		sudo iptables -D INPUT 3
-6. Chèn một rule mới vào vị trí xác định:
+**6. Chèn một rule mới vào vị trí xác định:**
 
 		sudo iptables -I INPUT 2 -p tcp --dport 8080 -j ACCEPT
-	Thay tham số Append -A  bằng tham số INSERT -I. Ở đây luật mới sẽ ở vị trí số 2
-7.  Lọc gói tin dựa trên nguồn
+Thay tham số Append -A  bằng tham số INSERT -I. Ở đây luật mới sẽ ở vị trí số 2
 
-	Iptables cho phép bạn lọc các gói tin dựa trên địa chỉ IP hoặc một dải địa chỉ IP. Bạn cần chỉ định nó sau tùy chọn -s . Ví dụ, để chấp nhận các gói từ 192.168.1.3 , lệnh sẽ là:
+**7.  Lọc gói tin dựa trên nguồn**
+
+Iptables cho phép bạn lọc các gói tin dựa trên địa chỉ IP hoặc một dải địa chỉ IP. Bạn cần chỉ định nó sau tùy chọn -s . Ví dụ, để chấp nhận các gói từ 192.168.1.3 , lệnh sẽ là:
 		
 		sudo iptables -A INPUT -s 192.168.1.3 -j ACCEPT
-	Bạn cũng có thể từ chối các gói từ một địa chỉ IP cụ thể bằng cách thay thế đích ACCEPT bằng DROP
+
+Cấu hình chỉ cho phép kết nối SSH từ một địa chỉ IP duy nhất được xác định. Ví dụ IP 192.168.1.3
+
+		sudo iptables -I INPUT -p tcp -s 192.168.1.3 -m tcp --dport 22 -j ACCEPT
+Bạn cũng có thể từ chối các gói từ một địa chỉ IP cụ thể bằng cách thay thế đích ACCEPT bằng DROP
 
 		sudo iptables -A INPUT -s 192.168.1.3 -j DROP
-	Nếu bạn muốn loại bỏ các gói tin từ một loạt các địa chỉ IP, bạn phải sử dụng tùy chọn -m và mô-đun iprange . Sau đó, chỉ định dải địa chỉ IP với –src-range . Hãy nhớ rằng, một dấu gạch nối sẽ phân tách phạm vi địa chỉ ip mà không có dấu cách, như sau:
+Chặn 1 IP truy cập vào 1 port cụ thể, ví dụ chặn IP 192.168.1.3 truy cập vào port 22 (SSH)
+
+		sudo iptables -A INPUT -p tcp -s 192.168.1.3 –dport 22 -j DROP
+Nếu bạn muốn loại bỏ các gói tin từ một loạt các địa chỉ IP, bạn phải sử dụng tùy chọn **-m** và mô-đun **iprange**. Sau đó, chỉ định dải địa chỉ IP với **–src-range**. Hãy nhớ rằng, một dấu gạch nối sẽ phân tách phạm vi địa chỉ ip mà không có dấu cách, như sau:
 		
 		sudo iptables -A INPUT -m iprange --src-range 192.168.1.100-192.168.1.200 -j DROP
+**8. Mở port Mail**
+
+Cho phép user dùng SMTP Server qua port mặc định là 25 và 465:
+
+		sudo iptables -I INPUT -p tcp -m tcp --dport 25 -j ACCEPT
+		sudo iptables -I INPUT -p tcp -m tcp --dport 465 -j ACCEPT
+-> IPtables sẽ hiển thị SMTP và URD theo mặc định
+
+		ACCEPT   tcp  -- anywhere      anywhere           tcp dpt:smtp
+		ACCEPT   tcp  -- anywhere      anywhere           tcp dpt:urd
+Mở port POP3 (port mặc định 110 và 995) cho phép user đọc mail trên server:
+
+		sudo iptables -A INPUT -p tcp -m tcp --dport 110 -j ACCEPT
+		sudo iptables -A INPUT -p tcp -m tcp --dport 995 -j ACCEPT
+-> IPtables sẽ hiển thị POP3 và POP3S theo mặc định
+
+		ACCEPT 	tcp  --  anywhere         	anywhere        	tcp dpt:pop3
+		ACCEPT 	tcp  --  anywhere         	anywhere        	tcp dpt:pop3s
+Cho phép sử dụng giao thức IMAP mail protocol (port mặc định là 143 và 993):
+
+		sudo iptables -A INPUT -p tcp -m tcp --dport 143 -j ACCEPT
+		sudo iptables -A INPUT -p tcp -m tcp --dport 993 -j ACCEPT
+-> IPtables sẽ hiển thị IMAP và IMAPS theo mặc định
+
+		ACCEPT 	tcp  --  anywhere         	anywhere        	tcp dpt:imap
+		ACCEPT 	tcp  --  anywhere         	anywhere        	tcp dpt:imaps
+**9. Kết thúc thiết lập IPtables**
+
+Sau khi đã thiết lập tất cả bao gồm mở các port cần thiết hoặc hạn chế kết nối cần block toàn bộ các kết nối còn lại và cho phép toàn bộ các kết nối ra ngoài.
+
+		sudo iptables -P OUTPUT ACCEPT
+		sudo iptables -P INPUT DROP
+**10. Lưu cấu hình IPtables**
+
+Lúc này những IPtables rules được tạo ra đều được lưu trong bộ nhớ, khi reboot máy chủ cần phải tạo lại các rules này. Để lưu giữ các thay đổi vào hệ thống dùng lệnh:
+
+		sudo /sbin/iptables-save
