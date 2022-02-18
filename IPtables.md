@@ -7,11 +7,8 @@
 * [https://help.ubuntu.com/community/IptablesHowTo](https://help.ubuntu.com/community/IptablesHowTo)
 * [https://www.hostinger.com/tutorials/iptables-tutorial](https://www.hostinger.com/tutorials/iptables-tutorial)
 * [https://wiki.matbao.net/iptables-la-gi-cach-cau-hinh-bao-mat-ubuntu-vps-linux-firewall/](https://wiki.matbao.net/iptables-la-gi-cach-cau-hinh-bao-mat-ubuntu-vps-linux-firewall/)
-## I. Basic Commands
-		sudo iptables -L
--> Liệt kê các quy tắc hiện tại của iptables
 
-## II.Basic Iptables Options
+## I.Basic Iptables Options
 1. -A : Nối quy tắc này vào 1 chuỗi quy tắc. Các chuỗi hợp lệ có dạng INPUT, FORWARD, OUTPUT. Nhưng chủ yếu xử lý INPUT, ảnh hưởng đến lưu lượng đến
 2. -L : Bộ lọc liệt kê các quy tắc hiện tại
 3. -m conntrack : Cho phép các quy tắc lọc khớp với nhau dựa trên trạng thái kết nối. Cho phép xử dụng tùy chọn --ctstate
@@ -51,7 +48,10 @@
 15. -d --destination : địa chỉ [/mask] thông số kỹ thuật đích
 16. -o --out-interface : tên đầu ra [+] tên giao diện mạng ([+] cho ký tự đại diện)
 
-## III. Basic rules are often used
+## II. Basic rules are often used
+		sudo iptables -L
+-> Liệt kê các quy tắc hiện tại của iptables
+
 **1. Kích hoạt lưu lượng truy cập trên Localhost**
 
 		sudo iptables -A INPUT -i lo -j ACCEPT
