@@ -55,7 +55,7 @@
 **1. Kích hoạt lưu lượng truy cập trên Localhost**
 
 		sudo iptables -A INPUT -i lo -j ACCEPT
-Lệnh này có nghĩa là:
+**Giúp đảm bảo các thao tác trên máy chủ hoạt động ổn định**. Lệnh này có nghĩa là:
 
 -A INPUT: khai báo kiểu kết nối sẽ được áp dụng (A nghĩa là Append).
 
