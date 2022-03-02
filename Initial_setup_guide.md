@@ -1,10 +1,6 @@
 # Thiết lập ban đầu đối với Ubuntu
 ![Ubuntu](https://user-images.githubusercontent.com/97789851/156393979-9354be29-ae9e-4197-a939-c1532161e2bb.jpg)
 
-**Người dùng **root** là người dùng quản trị trong môi trường Linux có các đặc quyền rất rộng. Do các đặc quyền cao của tài khoản root, bạn không nên sử dụng nó một cách thường xuyên. Tài khoản **root** có thể thực hiện các thay đổi rất nguy hiểm, thậm chí là do tình cờ**.
-
-**-> Bạn cần truy cập vào máy chủ Ubuntu với tư cách là người dùng thông thường, không phải **root** và tường lửa **UFW** được bật trên máy chủ của bạn**.
-
 **Bước 1 - Đăng nhập với quyền root**
 
 Để đăng nhập vào tài khoản **root** bạn sử dụng lệnh sau:
