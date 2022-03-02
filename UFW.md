@@ -15,6 +15,6 @@ Công cụ cấu hình tường lửa mặc định cho **Ubuntu** là **UFW** -
 **Cùng theo dõi nhé!! Chúc các bạn thành công :>**
 
 ## Thiết lập ban đầu
-Người dùng **root** là người dùng quản trị trong môi trường Linux có các đặc quyền rất rộng. Do các đặc quyền cao của tài khoản root, bạn không nên sử dụng nó một cách thường xuyên. Tài khoản **root** có thể thực hiện các thay đổi rất nguy hiểm, thậm chí là do tình cờ.
+**Người dùng root là người dùng quản trị trong môi trường Linux có các đặc quyền rất rộng. Do các đặc quyền cao của tài khoản root, bạn không nên sử dụng nó một cách thường xuyên. Tài khoản root có thể thực hiện các thay đổi rất nguy hiểm, thậm chí là do tình cờ**.
 
-**->** Bạn cần truy cập vào máy chủ Ubuntu 20.04 với tư cách là người dùng thông thường, không phải **root** và tường lửa **UFW** được bật trên máy chủ của bạn. Bạn có thể cài đặt theo **[Hướng dẫn thiết lập ban đầu](https://github.com/LamTruong-Cybersecurity/Firewall/blob/main/Initial_setup_guide.md)**.
+**-> Bạn cần truy cập vào máy chủ Ubuntu với tư cách là người dùng thông thường, không phải root và tường lửa UFW được bật trên máy chủ của bạn**. Bạn có thể cài đặt theo **[Hướng dẫn thiết lập ban đầu](https://github.com/LamTruong-Cybersecurity/Firewall/blob/main/Initial_setup_guide.md)**.
