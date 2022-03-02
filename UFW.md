@@ -8,7 +8,7 @@
 * [https://help.ubuntu.com/community/UFW](https://help.ubuntu.com/community/UFW)
 
 ## I. Giới thiệu về tường lửa UFW
-Công cụ cấu hình tường lửa mặc định cho **Ubuntu** là **UFW** - hay Tường lửa không phức tạp. Là một giao diện quản lý firewall được đơn giản hóa nhằm giảm thiểu sự phức tạp hơn so với các firewall như **iptables**. Nếu mới bắt đầu sử dụng tường lửa thì **UFW** cung cấp một cách thân thiện với dùng để tạo tường lửa trên máy chủ **Ubuntu**.
+Công cụ cấu hình tường lửa mặc định cho **Ubuntu** là **UFW** - hay Tường lửa không phức tạp. Là một giao diện quản lý firewall được đơn giản hóa nhằm giảm thiểu sự phức tạp hơn so với các firewall như **[IPtables](https://github.com/LamTruong-Cybersecurity/Firewall/blob/main/IPtables.md)**. Nếu mới bắt đầu sử dụng tường lửa thì **UFW** cung cấp một cách thân thiện với dùng để tạo tường lửa trên máy chủ **Ubuntu**.
 
 ***Lam Trường*** sẽ hướng dẫn các bạn cách cấu hình và sử dụng tường lửa **UFW** trên máy chủ Ubuntu.
 
