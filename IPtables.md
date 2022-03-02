@@ -167,3 +167,4 @@ Lúc này những IPtables rules được tạo ra đều được lưu trong b�
 Trong trường hợp xấu không mong muốn có thể bạn xóa một rule nào đó dẫn đến mất kết nối dịch vụ. Để khôi phục lại những rule đã tạo từ file backup ta dùng lệnh sau:
 
 		sudo iptables-restore < /usr/src/iptables-rule
+## Chúc các bạn thành công :>
