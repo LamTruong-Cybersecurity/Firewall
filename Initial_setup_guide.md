@@ -58,3 +58,4 @@ Kết quả hiển thị:
         To run a command as administrator (user "root"), use "sudo <command>".
         See "man sudo_root" for details.
         admin@ubuntu:~$
+## Chúc các bạn thành công :>
