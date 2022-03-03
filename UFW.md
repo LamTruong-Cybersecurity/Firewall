@@ -24,7 +24,7 @@ Hầu hết các bản phiên bản **Linux** đều được cài đặt sẵn 
 
 **-> Bạn cần truy cập vào máy chủ Ubuntu với tư cách là người dùng thông thường, không phải root và tường lửa UFW được bật trên máy chủ của bạn**. Bạn có thể cài đặt theo **[Hướng dẫn thiết lập ban đầu](https://github.com/LamTruong-Cybersecurity/Initial-Server-Setup)**.
 
-## II. Cài đặt UFW (Ubuntu đã được cài đặt mặc định, bỏ phần này nếu bạn sử dụng máy chủ Ubuntu)
+## II. Cài đặt UFW (Bỏ phần này nếu bạn sử dụng máy chủ Ubuntu)
 **=> LƯU Ý**: Bạn chỉ nên cài đặt **UFW** trên hệ thống **Linux** mới, tắt tất cả các loại tường lửa trên máy chủ của bạn nếu nó đang hoạt động. Chưa cài đặt bất cứ control panel, script quản lý nào như cPanel, aaPanel, CyberPanel, Centminmod,… Vì các loại control panel này luôn cài đặt sẵn các tiện ích tường lửa đi kèm. Cài đặt thêm **UFW** sẽ gây xung đột hệ thống.
 
 Nếu dùng **CentOS** thì các bạn thay thế **apt** bằng **yum**
