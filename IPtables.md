@@ -54,6 +54,7 @@
 16. -o --out-interface : tên đầu ra [+] tên giao diện mạng ([+] cho ký tự đại diện)
 
 ## II. Basic rules are often used
+**=> LƯU Ý**: Tắt tất cả các loại tường lửa trên máy chủ của bạn nếu nó đang hoạt động. Chưa cài đặt bất cứ control panel, script quản lý nào như cPanel, aaPanel, CyberPanel, Centminmod,… Vì các loại control panel này luôn cài đặt sẵn các tiện ích tường lửa đi kèm. Cài đặt thêm **UFW** sẽ gây xung đột hệ thống.
 		sudo iptables -L
 -> Liệt kê các quy tắc hiện tại của iptables
 
