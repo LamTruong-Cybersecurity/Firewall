@@ -122,13 +122,13 @@ Tường lửa giờ đã được kích hoạt. Kiểm tra lại tình trạng 
 **Đến đây, bạn nên cho phép tất cả các kết nối khác mà server của bạn cần phản hồi. Các kết nối mà bạn nên cho phép tùy thuộc vào nhu cầu cụ thể của bạn.**
 
 ### Mở kết nối cho web server Apache / Nginx:
-* Dịch vụ web server HTTP sử dụng cổng **80**, mở kết nối bằng lệnh:
+* Dịch vụ web server **HTTP** sử dụng cổng **80**, mở kết nối bằng lệnh:
 
         sudo ufw allow http
   Hoặc sử dụng:
 
         sudo ufw allow 80
-* Dịch vụ web server HTTPS sử dụng cổng **443**, mở kết nối bằng lệnh:
+* Dịch vụ web server **HTTPS** sử dụng cổng **443**, mở kết nối bằng lệnh:
 
         sudo ufw allow https
   Hoặc sử dụng:
@@ -136,12 +136,48 @@ Tường lửa giờ đã được kích hoạt. Kiểm tra lại tình trạng 
         sudo ufw allow 443
 **-> Bạn cũng có thể mở kết nối HTTP và HTTPS theo tên của Web Server:**
 
-* Nếu máy chủ đang cài web server Apache:
+* Nếu máy chủ đang cài web server **Apache**:
 
         sudo ufw allow 'Apache Full'
-* Nếu máy chủ đang cài web server Nginx:
+* Nếu máy chủ đang cài web server **Nginx**:
 
         sudo ufw allow 'Nginx Full'
 **=> Bạn có thể kiểm tra hồ sơ ứng dụng, dịch vụ đã được cài đặt trên máy chủ bằng lệnh:**
 
         sudo ufw app list
+
+### Mở kết nối theo dãy cổng cụ thể:
+**Bạn có thể cấu hình mở cổng mạng cho UFW bằng lệnh:**
+        
+        sudo ufw allow <port>
+Ví dụ mình muốn mở kết nối cho cổng 873 dịch vụ truyền tải file qua mạng **rsync**
+
+        sudo ufw allow 873
+Bạn có thể chỉ định phạm vi cổng với **UFW**. Một số ứng dụng sử dụng nhiều cổng, thay vì một cổng duy nhất. Ví dụ dưới đây là cách mở kết nối cho dịch vụ **X11**
+
+        sudo ufw allow 6000:6007/tcp
+        sudo ufw allow 6000:6007/udp
+
+### Cho phép kết nối theo địa chỉ IP cụ thể:
+**Khi làm việc với UFW, bạn cũng có thể chỉ định địa chỉ IP.** 
+
+Ví dụ: nếu bạn muốn cho phép kết nối từ một địa chỉ IP cụ thể, chẳng hạn như địa chỉ IP cơ quan hoặc nhà riêng là **192.168.5.50**, bạn cần chỉ định **from** , sau đó là địa chỉ IP:
+
+        sudo ufw allow from 192.168.5.50
+**Bạn có thể quy định thêm cổng kết nối để giới hạn truy cập cho IP.**
+
+Ví dụ mình muốn cho phép địa chỉ IP **192.168.5.50** kết nối vào cổng **22 (SSH)**, sử dụng lệnh sau:
+
+        sudo ufw allow from 192.168.5.50 to any port 22
+
+### Cho phép kết nối theo Subnet (Mạng con)
+**Bạn có thể thay thế IP bằng Subnet để cho phép kết nối theo lớp mạng.** 
+
+Ví dụ: mình muốn cho phép dãy IP từ 10.0.1.1 đến 10.0.1.254, sử dụng lệnh sau:
+
+        sudo ufw allow from 10.0.1.0/24
+**Tương tự như vậy, bạn cũng có thể chỉ định cổng đích mà Subnet 10.0.1.0/24 được phép kết nối.**
+
+Ta sẽ sử dụng cổng **22 (SSH)** làm ví dụ:
+
+        sudo ufw allow from 10.0.1.0/24 to any port 22
