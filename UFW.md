@@ -68,7 +68,7 @@ Sau đó, chúng ta sẽ thiết lập thêm các quy tắc để cho phép các
 ### Cho phép kết nối SSH
 Bạn cần mở cổng kết nối **SSH** trước khi kích hoạt **UFW**. Nếu không, bạn sẽ không thể truy cập vào máy chủ được nữa, do thiết lập mặc định đã chặn mọi kết nối từ bên ngoài vào.
 
-Bạn có thể mở kết nối SSH bằng 3 cách sau:
+Bạn có thể mở kết nối **SSH** bằng 3 cách sau:
 
 **Cách 1:** Sử dụng tên ứng dụng **OpenSSH**
 
@@ -88,3 +88,30 @@ Nếu bạn đã cấu hình truy cập SSH qua cổng khác, cần phải thay 
         Rule added (v6)
 
 ## IV. Bật tường lửa UFW
+Sau khi đã mở cổng kết nối **SSH**, bạn đã có thể kích hoạt tường lửa **UFW**.
+
+Trước khi kích hoạt, kiểm tra lại các quy tắc đã được thiết lập trên **UFW** bằng lệnh sau:
+
+        sudo ufw show added
+Kết quả hiện thị:
+
+        Added user rules (see 'ufw status' for running firewall):
+        ufw allow 22
+Sau khi đã chắc chắn đã mở cổng kết nối **SSH**, kích hoạt **UFW** bằng lệnh:
+
+        sudo ufw enable
+Hệ thống sẽ cảnh báo việc kích hoạt **UFW** có thể gây gián đoạn kết nối **SSH**. Do bạn đã cấu hình mở cổng **SSH** nên sẽ không gặp vấn đề nào cả. Chọn "y" và bấm "Enter" để xác nhận.
+
+        Command may disrupt existing ssh connections. Proceed with operation (y|n)? y
+        Firewall is active and enabled on system startup
+Tường lửa giờ đã được kích hoạt. Kiểm tra lại tình trạng hoạt động của UFW để xác nhận các dịch vụ được cho phép:
+
+        Status: active
+        Logging: on (low)
+        Default: deny (incoming), allow (outgoing), disabled (routed)
+        New profiles: skip
+
+        To                         Action      From
+        --                         ------      ----
+        22                         ALLOW IN    Anywhere
+        22 (v6)                    ALLOW IN    Anywhere (v6)
