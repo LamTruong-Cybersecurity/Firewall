@@ -173,7 +173,7 @@ Ví dụ mình muốn cho phép địa chỉ IP **192.168.5.50** kết nối và
 ### Cho phép kết nối theo Subnet (Mạng con)
 **Bạn có thể thay thế IP bằng Subnet để cho phép kết nối theo lớp mạng.** 
 
-Ví dụ: mình muốn cho phép dãy IP từ 10.0.1.1 đến 10.0.1.254, sử dụng lệnh sau:
+Ví dụ: mình muốn cho phép dãy IP từ **10.0.1.1** đến **10.0.1.254**, sử dụng lệnh sau:
 
         sudo ufw allow from 10.0.1.0/24
 **Tương tự như vậy, bạn cũng có thể chỉ định cổng đích mà Subnet 10.0.1.0/24 được phép kết nối.**
@@ -181,3 +181,39 @@ Ví dụ: mình muốn cho phép dãy IP từ 10.0.1.1 đến 10.0.1.254, sử d
 Ta sẽ sử dụng cổng **22 (SSH)** làm ví dụ:
 
         sudo ufw allow from 10.0.1.0/24 to any port 22
+
+### Từ chối kết nối
+Sử dụng tham số **deny** để chặn kết nối vào máy chủ.
+* Chặn kết nối **HTTP**:
+
+        sudo ufw deny http
+* Hoặc nếu bạn muốn từ chối tất cả các kết nối từ địa chỉ IP cụ thể **123.123.123.123** bạn có thể sử dụng lệnh này:
+
+        sudo ufw deny from 123.123.123.123
+* Chặn cổng **25** từ máy chủ ra bên ngoài (mục đích nhằm chặn dịch vụ **email SMTP**)
+
+        sudo ufw deny out 25
+
+### Xoá kết nối theo số thứ tự:
+Để xoá quy tắc theo số thứ tự, bạn cần liệt kê các quy tắc theo thứ tự bằng lệnh:
+
+        sudo ufw status numbered
+Kết quả hiển thị:
+
+        Status: active
+
+                To                         Action      From
+                --                         ------      ----
+        [ 1] 22                         ALLOW IN    Anywhere
+        [ 2] 80                         ALLOW IN    Anywhere
+        [ 3] 22 (v6)                    ALLOW IN    Anywhere (v6)
+        [ 4] 80 (v6)                    ALLOW IN    Anywhere (v6)
+Nếu muốn xoá kết nối dịch vụ **HTTP**, số thứ tự **2**, sử dụng lệnh:
+
+        sudo ufw delete 2
+Điều này sẽ hiển thị dấu nhắc xác nhận sau đó xóa luật **2**. Lưu ý nếu bạn đã bật IPv6, bạn cũng muốn xóa luật IPv6 tương ứng. Kết quả hiển thị:
+
+        Deleting:
+         allow 80
+        Proceed with operation (y|n)? y
+        Rule deleted
