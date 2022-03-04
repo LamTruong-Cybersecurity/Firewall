@@ -54,3 +54,7 @@ Kết quả trả về: **inactivate** (nghĩa là chưa kích hoạt)
         Status: inactive
 
 ## III. Cấu hình căn bản UFW
+### Thiết lập chế độ mặc định
+Đầu tiên, bạn cần thiết lập chế độ hoạt động mặc định của UFW:
+* Chặn tất cả các kết nối từ ngoài truy cập vào máy chủ.
+* Chỉ cho phép kết nối từ máy chủ ra bên ngoài.
