@@ -104,7 +104,7 @@ Hệ thống sẽ cảnh báo việc kích hoạt **UFW** có thể gây gián �
 
         Command may disrupt existing ssh connections. Proceed with operation (y|n)? y
         Firewall is active and enabled on system startup
-Tường lửa giờ đã được kích hoạt. Kiểm tra lại tình trạng hoạt động của UFW để xác nhận các dịch vụ được cho phép:
+Tường lửa giờ đã được kích hoạt. Kiểm tra lại tình trạng hoạt động của **UFW** để xác nhận các dịch vụ được cho phép:
 
         Status: active
         Logging: on (low)
@@ -115,3 +115,33 @@ Tường lửa giờ đã được kích hoạt. Kiểm tra lại tình trạng 
         --                         ------      ----
         22                         ALLOW IN    Anywhere
         22 (v6)                    ALLOW IN    Anywhere (v6)
+
+## V. Cấu hình tường lửa UFW nâng cao
+**Phần còn lại của hướng dẫn này trình bày chi tiết hơn về cách sử dụng UFW, chẳng hạn như cho phép hoặc từ chối các loại kết nối khác nhau.**
+
+**Đến đây, bạn nên cho phép tất cả các kết nối khác mà server của bạn cần phản hồi. Các kết nối mà bạn nên cho phép tùy thuộc vào nhu cầu cụ thể của bạn.**
+
+### Mở kết nối cho web server Apache / Nginx:
+* Dịch vụ web server HTTP sử dụng cổng **80**, mở kết nối bằng lệnh:
+
+        sudo ufw allow http
+  Hoặc sử dụng:
+
+        sudo ufw allow 80
+* Dịch vụ web server HTTPS sử dụng cổng **443**, mở kết nối bằng lệnh:
+
+        sudo ufw allow https
+  Hoặc sử dụng:
+
+        sudo ufw allow 443
+**-> Bạn cũng có thể mở kết nối HTTP và HTTPS theo tên của Web Server:**
+
+* Nếu máy chủ đang cài web server Apache:
+
+        sudo ufw allow 'Apache Full'
+* Nếu máy chủ đang cài web server Nginx:
+
+        sudo ufw allow 'Nginx Full'
+**=> Bạn có thể kiểm tra hồ sơ ứng dụng, dịch vụ đã được cài đặt trên máy chủ bằng lệnh:**
+
+        sudo ufw app list
