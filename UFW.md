@@ -54,7 +54,37 @@ Kết quả trả về: **inactivate** (nghĩa là chưa kích hoạt)
         Status: inactive
 
 ## III. Cấu hình căn bản UFW
+
 ### Thiết lập chế độ mặc định
-Đầu tiên, bạn cần thiết lập chế độ hoạt động mặc định của UFW:
+Đầu tiên, bạn cần thiết lập chế độ hoạt động mặc định của **UFW**:
 * Chặn tất cả các kết nối từ ngoài truy cập vào máy chủ.
+
+        sudo ufw default deny incoming
 * Chỉ cho phép kết nối từ máy chủ ra bên ngoài.
+
+        sudo ufw default allow outgoing
+Sau đó, chúng ta sẽ thiết lập thêm các quy tắc để cho phép các kết nối bên ngoài truy cập vào các dịch vụ qua các cổng được chỉ định tuỳ theo nhu cầu sử dụng.
+
+### Cho phép kết nối SSH
+Bạn cần mở cổng kết nối **SSH** trước khi kích hoạt **UFW**. Nếu không, bạn sẽ không thể truy cập vào máy chủ được nữa, do thiết lập mặc định đã chặn mọi kết nối từ bên ngoài vào.
+
+Bạn có thể mở kết nối SSH bằng 3 cách sau:
+
+**Cách 1:** Sử dụng tên ứng dụng **OpenSSH**
+
+        sudo ufw allow OpenSSH
+**Cách 2:** Sử dụng tên dịch vu **ssh**
+
+        sudo ufw allow ssh
+**Cách 3:** Sử dụng port **22**
+
+        sudo ufw allow 22
+Nếu bạn đã cấu hình truy cập SSH qua cổng khác, cần phải thay đổi port tương ứng khi cấu hình UFW. Ví dụ, nếu bạn cấu hình truy cập SSH Server qua cổng 2222, hãy đổi thành lệnh sau để mở cổng kết nối:
+
+        sudo ufw allow 2222
+**-> Tất cả các cách trên đều trả về kết quả hiển thị:**
+
+        Rule added
+        Rule added (v6)
+
+## IV. Bật tường lửa UFW
