@@ -217,3 +217,41 @@ Nếu muốn xoá kết nối dịch vụ **HTTP**, số thứ tự **2**, sử 
          allow 80
         Proceed with operation (y|n)? y
         Rule deleted
+
+### Xoá kết nối theo tên dịch vụ hoặc port:
+Ví dụ mình có thể xoá kết nối dịch vụ **HTTP** bằng 1 trong 2 cách sau:
+
+        sudo ufw delete allow http
+Hoặc:
+
+        sudo ufw delete allow 80
+Phương pháp này sẽ xóa cả luật IPv4 và IPv6, nếu chúng tồn tại.
+
+### Kiểm tra tình trạng hoạt động của UFW
+Bạn có thể kiểm tra tình trạng hoạt động của **UFW** bằng lệnh:
+
+        sudo ufw status verbose
+Kết quả hiển thị minh họa:
+
+        Status: active
+        Logging: on (low)
+        Default: deny (incoming), allow (outgoing), deny (routed)
+        New profiles: skip
+
+        To                         Action      From
+        --                         ------      ----
+        22/tcp (OpenSSH)           ALLOW IN    Anywhere                  
+        80/tcp                     ALLOW IN    Anywhere                  
+        22/tcp (OpenSSH (v6))      ALLOW IN    Anywhere (v6)             
+        80/tcp (v6)                ALLOW IN    Anywhere (v6)
+
+## VI. Tắt hoặc thiết lập lại UFW
+Nếu bạn không còn cần sử dụng **UFW**, bạn có thể tắt nó bằng lệnh sau:
+
+        sudo ufw diable
+Các quy tắc đã thiết lập vẫn được giữ nguyên, không bị xoá khi bạn vô hiệu hoá **UFW**. Mọi luật bạn đã tạo bằng **UFW** sẽ không còn hoạt động. Bạn luôn có thể chạy **sudo ufw enable** nếu bạn cần kích hoạt nó sau này.
+
+Nếu muốn xoá hết tắc cả các quy tắc đã thiết lập và cấu hình **UFW** lại từ đầu, bạn dùng tham số **reset**:
+
+        sudo ufw reset
+## Chúc các bạn thành công :>
