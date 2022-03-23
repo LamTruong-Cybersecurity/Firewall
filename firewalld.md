@@ -1,4 +1,7 @@
-## **FIREWALLD**
+# FIREWALLD
+
+![firewalld-1-1200x675](https://user-images.githubusercontent.com/97789851/159662638-a5e2d599-2d04-45ef-b2d2-e5dd27012b0e.png)
+
 ## **Khái niệm**
 
 - FirewallD là giải pháp tường lửa mạnh mẽ, toàn diện được cài đặt mặc định trên CentOS/RHEL 7, nhằm thay thế Iptables với những khác biệt cơ bản:
