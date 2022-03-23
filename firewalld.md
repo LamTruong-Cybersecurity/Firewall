@@ -2,15 +2,19 @@
 
 ![firewalld-1-1200x675](https://user-images.githubusercontent.com/97789851/159662638-a5e2d599-2d04-45ef-b2d2-e5dd27012b0e.png)
 
-## **Khái niệm**
+***Tài liệu tham khảo:***
 
+* [https://cloud.z.com/vn/support/cloud/thiet-lap-tuong-lua-firewalld-tren-centos-7/](https://cloud.z.com/vn/support/cloud/thiet-lap-tuong-lua-firewalld-tren-centos-7/)
+* [http://cuongcong.com/server/thiet-lap-he-thong-tuong-lua-firewalld-tren-centos-7.html](http://cuongcong.com/server/thiet-lap-he-thong-tuong-lua-firewalld-tren-centos-7.html)
+* [https://firewalld.org/documentation/](https://firewalld.org/documentation/)
+
+## I. Khái niệm
 - FirewallD là giải pháp tường lửa mạnh mẽ, toàn diện được cài đặt mặc định trên CentOS/RHEL 7, nhằm thay thế Iptables với những khác biệt cơ bản:
-
 - FirewallD sử dụng “zones” và “services” thay vì “chain” và “rules” trong Iptables.
-
 - FirewallD quản lý các quy tắc được thiết lập tự động, có tác dụng ngay lập tức mà không làm mất đi các kết nối và session hiện có.
-## **Các khái niệm cơ bản**
-### **1. Zone**
+
+## II. Các khái niệm cơ bản
+### 1. Zone
 - Trong FirewallD, zone là một nhóm các quy tắc nhằm chỉ ra những luồng dữ liệu được cho phép, dựa trên mức độ tin tưởng của điểm xuất phát luồng dữ liệu đó trong hệ thống mạng. Để sử dụng, bạn có thể lựa chọn zone mặc định, thiết lập các quy tắc trong zone hay chỉ định network interface để quy định hành vi được cho phép.
 
 - ```drop :``` ít tin cậy nhất – toàn bộ các kết nối đến sẽ bị từ chối mà không phản hồi , chỉ cho phép duy nhất kết nối đi ra .
@@ -31,12 +35,12 @@
 
 - ```trusted :``` đáng tin cậy nhất – tin tưởng toàn bộ thiết bị trong hệ thống.
 
-### **2. Hiệu lực các quy tắc**
+### 2. Hiệu lực các quy tắc
 - ```Runtime ( mặc định ) :``` có tác dụng ngay lập tức , mất hiệu lực khi reboot hệ thống .
 
 - ```Permanent :``` không áp dụng cho hệ thống đang chạy, cần reload mới có hiệu lực , tác dụng vĩnh viễn cả khi reboot hệ thống .
-## **Cài đặt cấu hình firewalld**
-### **1. Thiết lập các zone**
+## III. Cài đặt cấu hình firewalld
+### 1. Thiết lập các zone
 - Liệt kê tất cả các zone trong hệ thống :
 
 ```console 
@@ -63,7 +67,7 @@ firewall-cmd --get-active-zones
 firewall-cmd --set-default-zone=home
 ```
 
-### **2. Thiết lập các rule**
+### 2. Thiết lập các rule
 
 - Liệt kê toàn bộ các rule của các zones :
 
@@ -91,7 +95,7 @@ firewall-cmd --zone=public --list-services
 ```console
 firewall-cmd --zone=public --list-ports
 ```
-### **3. Thiết lập service**
+### 3. Thiết lập service
 Xác định các services trên hệ thống :
 
 ```console
@@ -123,7 +127,7 @@ firewall-cmd --zone=public --remove-service=http
 ```console
 firewall-cmd --zone=public --remove-service=http --permanent
 ```
-### **4. Thiết lập cho port**
+### 4. Thiết lập cho port
 
 - Mở port với tham số --add-port :
 
@@ -158,7 +162,7 @@ firewall-cmd --zone=public --remove-port=9999/tcp
 ```console
 firewall-cmd --zone=public --remove-port=9999/tcp --permanent
 ```
-### **5. Cấu hình nâng cao**
+### 5. Cấu hình nâng cao
 ### Tạo Zone riêng
 
 - Mặc dù, các zone có sẵn là quá đủ với nhu cầu sử dụng , vẫn có thể tạo lập zone của riêng mình để mô tả rõ ràng hơn về các chức năng của chúng .
